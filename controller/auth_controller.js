@@ -1,10 +1,10 @@
-    const {validationResult} = require('express-validator')
-    const userRepo = require('../repo/user_repo')
-    const bcrypt = require('bcrypt')
-    const {generateAccessToken} = require('../service/jwt_service')
+const {validationResult} = require('express-validator')
+const userRepo = require('../repo/user_repo')
+const bcrypt = require('bcrypt')
+const {generateAccessToken} = require('../service/jwt_service')
     
     
-    class AuthConstroller{
+class AuthConstroller{
     async registration (req, res) {
         try {
 
@@ -30,7 +30,7 @@
                         firstname,
                         lastname,
                         role: "STUDENT"
-                    })
+                    }) 
 
                     return res.status(200).json("registration is successful")
                 })

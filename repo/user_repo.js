@@ -18,6 +18,24 @@ class UserRepo{
             .then(user => user)
             .catch(err => console.error(err))
     }
+
+    async updateUser(user){
+
+        await User.update({
+            nickname: user?.nickname,
+            email: user?.email,
+            firstname: user?.firstname,
+            lastname: user?.lastname,
+            age: user?.age,
+            phone: user?.phone
+        }, {
+            where: {
+              id: user.id
+            }
+          })
+          .then((user) => {return user})
+          .catch((e) => {return})
+    }
 }
 
 module.exports = new UserRepo()

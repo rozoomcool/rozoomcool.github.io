@@ -1,18 +1,19 @@
 const {verifyToken} = require('../service/jwt_service')
 const userRepo = require('../repo/user_repo')
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     try{
         const token = req.headers.authorization.split(' ')[1]
+        const token_data = verifyToken(token)
 
         if(!token){
             return res.status(403).json({message: "user has not authenticated"})
         } else {
 
-            const user = userRepo.findById(token.id)
+            const user = await userRepo.findById(token.id)
 
-            if(token.role === 'ADMIN' || token.id === user.id){
-                next()
+            if(token_data.role === 'ADMIN' || token_data.id == user.id){
+                return next()
             }
         }
 
